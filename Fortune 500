@@ -1,0 +1,25 @@
+--Group the data in a new way using a CASE statement.
+Select
+	employees,
+    CASE 
+    	WHEN avg_employee_tenure >=7 THEN 'High Seniority'
+        WHEN avg_employee_tenure >=4 THEN 'Low Seniority'
+        ELSE'New'
+    END AS Seniority
+From fortune_companies
+Where industry = 'Energy';
+-- Which Companies Avg $150b, and what's there avg revenue?
+SELECT industry, ROUND(AVG(revenue),1) as avg_revenue_billions
+FROM fortune_companies
+GROUP BY industry
+HAVING avg_revenue_billions>=150;
+--Which companies have healthcare benefits *and* at least 20 paid time off days?
+Select company_name
+from fortune_companies
+Where paid_time_off_days >=20
+AND healthcare_benefits;
+--Which company in the Tech industry has the least revenue, and what's their revenue? 
+SELECT company_name, min(revenue)
+FROM fortune_companies
+WHERE industry = 'Technology'
+;
